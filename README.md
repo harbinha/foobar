@@ -1,4 +1,5 @@
-# node-js-getting-started
+# foobar
+a repo of things
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).
 
