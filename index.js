@@ -1,16 +1,22 @@
 var express = require('express');
 var app = express();
+var request = require('request');
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/public'));
-
-// views is directory for all template files
-//app.set('views', __dirname + '/views');
-//app.set('view engine', 'ejs');
-
 app.get('/', function(req, res) {
   res.send('Hello World!')
+});
+
+app.get('/times', function(req, response) {
+  request('https://www.reddit.com/r/gaming/top/.json?limit=1', function(err, r, body) {
+    if (r.statusCode === 200) {
+      response.send(body);
+    } else {
+      response.send('ouch');
+    }
+  })
+
 });
 
 app.listen(app.get('port'), function() {
