@@ -1,6 +1,9 @@
 var express = require('express');
-var app = express();
+var cors = require('cors');
 var request = require('request');
+var app = express();
+
+app.use(cors());
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -11,7 +14,7 @@ app.get('/', function(req, res) {
 app.get('/times', function(req, response) {
   request('https://www.reddit.com/r/gaming/top/.json?limit=1', function(err, r, body) {
     if (r.statusCode === 200) {
-      response.send(body);
+      response.json(body);
     } else {
       response.send('ouch');
     }
